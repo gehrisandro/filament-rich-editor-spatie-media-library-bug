@@ -9,12 +9,15 @@ use Filament\Forms\Components\RichEditor\Models\Contracts\HasRichContent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable implements HasRichContent
+class User extends Authenticatable implements HasRichContent, HasMedia
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
     use InteractsWithRichContent;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -52,8 +55,7 @@ class User extends Authenticatable implements HasRichContent
 
     public function setUpRichContent(): void
     {
-        $this->registerRichContent('bio');
-        $this->registerRichContent('bio_with_images')
+        $this->registerRichContent('bio')
             ->fileAttachmentProvider(SpatieMediaLibraryFileAttachmentProvider::make());
     }
 }

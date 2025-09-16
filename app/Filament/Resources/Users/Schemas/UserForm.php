@@ -25,8 +25,6 @@ class UserForm
                     ->required(),
                 RichEditor::make('bio')
                     ->required(),
-                RichEditor::make('bio_with_images')
-                    ->required(),
             ]);
     }
 }
